@@ -11,28 +11,27 @@ function letterCombinations(input_digit) {
     '9': 'wxyz',
   };
 
-	function combination(index, curr, combi)
-		{
-			if(index===input_digit.length)
-			{
-			combi.push(curr)
-				return
-			}
-			const digit = input_digit[index]
-			const letters = mapping[input_digit]
-
-			for(let i=0;i<letters.length;i++)
-				{
-					const letter = letters[i]
-					combination(index+1,curr+letter,combi)
-				}
-		}
-	const combinations=[]
-	if(input_digit.length>0)
+	if(input_digit.length===0)
 	{
-		combination(0,"",combinations)
+		return []
 	}
-	return combinations.sort()
+
+	const combi=['']
+	for(const digit of input_digit)
+		{
+			const letters = digToLetter[input_digit]
+			const newCombi =[]
+
+			for(const com of combi)
+				{
+					for(const letter of letters){
+						newCombi.push(com+letter)
+					}
+				}
+			combi.length=0
+			combi.push(...newCombi)
+		}
+	return com
 }
 
 module.exports = letterCombinations;
