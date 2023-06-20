@@ -1,6 +1,6 @@
 function letterCombinations(input_digit) {
   //Complete the function
-	const mapping = {
+	let mapping = {
     '2': 'abc',
     '3': 'def',
     '4': 'ghi',
@@ -11,27 +11,27 @@ function letterCombinations(input_digit) {
     '9': 'wxyz',
   };
 
-	if(input_digit.length===0)
-	{
-		return []
-	}
+	let solutions = [] ;
 
-	const combi=['']
-	for(const digit of input_digit)
-		{
-			const letters = digToLetter[input_digit]
-			const newCombi =[]
+function solve(currentIndex, calculatedString) {
+    if(input.length <= currentIndex){
+        solutions.push(calculatedString);
+        return;
+    }
+    // currentIndex = 2, calculatedString = "dm"
+    let currentChar = input[currentIndex] // "3"
+    // table["3"] = "def"
+    for(let i = 0 ; i < mapping[currentChar].length; i++) {
+        // "def" 
+        solve(currentIndex + 1, calculatedString + mapping[currentChar][i] )
+        // solve(0 + 1, "" + "d")
+    }
+}
 
-			for(const com of combi)
-				{
-					for(const letter of letters){
-						newCombi.push(com+letter)
-					}
-				}
-			combi.length=0
-			combi.push(...newCombi)
-		}
-	return com
+solve(0, "")
+
+console.log(solutions)
+
 }
 
 module.exports = letterCombinations;
