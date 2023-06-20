@@ -30,7 +30,7 @@ function solve(currentIndex, calculatedString) {
 
 solve(0, "")
 
-console.log(solutions)
+return (solutions)
 
 }
 
